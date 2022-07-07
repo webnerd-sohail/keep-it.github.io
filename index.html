@@ -33,7 +33,11 @@ project last modified on 14th april 2022 -->
     <!-- navbar -->
     <nav class="navbar navbar-expand-lg navbar-light bg-primary">
       <div class="container-fluid">
-        <a class="navbar-brand" href="#">MyNotes</a>
+        <a class="navbar-brand" href="#">
+          <span id="logo-heading">
+            KeepIt!
+          </span>
+        </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
         aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -67,9 +71,15 @@ project last modified on 14th april 2022 -->
         <div class="card ">
            
             <div class="card-body">
+              <!-- for title -->
+
+              <div class="mb-3">
+                <label for="exampleFormControlInput1" class="form-label"><strong>Add Title</strong></label>
+                <input type="text" class="form-control" id="addTitle" placeholder="add Title here">
+              </div>
+              
               <h5 class="card-title">Add Note Here</h5>
               <div class="mb-3">
-                
                 <textarea class="form-control resize" id="addNote" rows="3"></textarea>
               </div>
               <button class="btn btn-primary" id="addBtn">Add Note</button>

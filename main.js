@@ -3,9 +3,11 @@ showNotes();
 // adding eventlistners that will add the notes to localstorage
 
 let addBtn = document.getElementById('addBtn');
+
 // eventlistner
 addBtn.addEventListener("click", function(e){
-    let addNote = document.getElementById("addNote"); //collect the textarea content
+    let addNote = document.getElementById("addNote"); //collect the textarea content for notes
+    let addTitle = document.getElementById("addTitle"); //collect the textarea content for title
     let notes = localStorage.getItem("notes"); // get the content of notes and put them into local storage in the array of notes
 
     // if notes is not declare in local storage then
@@ -24,11 +26,18 @@ addBtn.addEventListener("click", function(e){
             notesObj = JSON.parse(notes);
         }
          // take the value from textarea od id addnote push it into notesobject.
-         notesObj.push(addNote.value);
+        //  creating an object to add title and text
+        let myObject = {
+            title:addTitle.value,
+            text: addNote.value
+        };
+
+         notesObj.push(myObject);
          //set key notes in local storage and give an array in string format stored in notesobject
         localStorage.setItem("notes", JSON.stringify(notesObj)); 
         //null the value of text area after passing it to local storage
         addNote.value = "";
+        addTitle.value = "";
         console.log(notesObj);
         showNotes();
     }
@@ -58,10 +67,16 @@ function showNotes(){
 
     notesObj.forEach(function(element, index){
 
+
+        
+
+
+
+
         html += ` <div class="card my-2 mx-2 noteCards notes" style="width: 18rem;">
         <div class="card-body">
-            <h5 class="card-title">Note ${index + 1}</h5>
-            <p class="card-text" id="showNotes">${element}</p>
+            <h5 class="card-title">${index + 1}) ${element.title}</h5>
+            <p class="card-text" id="showNotes">${element.text}</p>
             <button id = ${index} onclick = 'deleteNote(this.id)' class="btn btn-primary" id="deleteNote">Delete Note</button>
           </div>
       </div>`
@@ -84,7 +99,7 @@ function showNotes(){
 
 function deleteNote(index)
 {
-    console.log(`deleted`, index);
+    // console.log(`deleted`, index);
 
     let notes = localStorage.getItem("notes"); // get the content of notes and put them into local storage in the array of notes
 
@@ -107,6 +122,7 @@ function deleteNote(index)
 // some js for search function
 
 let searchTxt = document.getElementById("searchTxt");
+let noteElement = document.getElementById('notes');
 searchTxt.addEventListener("input", function(){
     
     let searchVal = searchTxt.value.toLowerCase();
@@ -125,14 +141,21 @@ searchTxt.addEventListener("input", function(){
         }
         else
      {
+
             element.style.display = "none";
+             
+
+          
+            
         }
+      
     })
+    
 })
 
 /*
 later on will add following features:
-1. add title
+1. add title - done on 07th july 2022
 2. mark a note as important
 3. Separate notes by user
 4. sync with server and host to webserver
